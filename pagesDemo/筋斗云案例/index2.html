@@ -93,11 +93,12 @@
         //定时器的id值存储到对象的一个属性中
         active.timeId = setInterval(function () {
             // //获取元素的当前的位置,数字类型
-            var current = active.offsetLeft
+            let current = active.offsetLeft
             // //每次移动的距离
-            var step = (target - current) /10;
+            let step = (target - current) /10;
                 step = step > 0 ? Math.ceil(step) : Math.floor(step);
-            current+= step
+                current+= step
+
             if (Math.abs(current - target) > Math.abs(step)) {
                 active.style.left = current + "px";
             } else {

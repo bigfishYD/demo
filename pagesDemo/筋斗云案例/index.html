@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>筋斗云</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #header .nav{
+            height: 63px;
+            width: 900px;
+            margin: 200px auto;
+            background: url("doubleOne.png") no-repeat right center #f7f7f7;
+            border: 1px solid #CBCBCB;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #header .nav ul{
+           display: flex;
+        }
+
+        #header .nav ul li{
+            width: 88px;
+            line-height: 70px;
+            z-index: 111;
+            cursor:pointer;
+            transition: all .4s ;
+        }
+
+        #header .nav ul li:hover{
+            color: #fff;
+        }
+
+        #header .nav span.active{
+            width: 88px;
+            height: 63px;
+            background: url("tMall.png") no-repeat;
+            position: absolute;
+            left: 0;
+            transition: all .4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="nav">
+            <span class="active"></span>
+            <ul>
+                <li>双11狂欢</li>
+                <li>服装会场</li>
+                <li>数码家电</li>
+                <li>家具建材</li>
+                <li>母婴童装</li>
+                <li>手机会场</li>
+                <li>美妆会场</li>
+                <li>进口会场</li>
+                <li>飞猪旅行</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+
+        var li =  document.querySelector(".nav").children[1].children;
+        var active = document.querySelector(".active")
+        var defaultX = 0;
+        for (var i = 0; i < li.length; i++){
+            li[i].index = i;
+            li[i].onmouseover = function () {
+                active.style.left = this.index * this.offsetWidth + "px";
+            }
+            li[i].onmouseleave = function () {
+                active.style.left = defaultX * this.offsetWidth + "px"
+            }
+            li[i].onclick = function () {
+                defaultX = this.index;
+            }
+        }
+    </script>
+</body>
+</html>

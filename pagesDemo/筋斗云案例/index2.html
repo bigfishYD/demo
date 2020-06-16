@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>筋斗云</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #header .nav{
+            height: 63px;
+            width: 900px;
+            margin: 200px auto;
+            background: url("doubleOne.png") no-repeat right center #f7f7f7;
+            border: 1px solid #CBCBCB;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #header .nav ul{
+            display: flex;
+        }
+
+        #header .nav ul li{
+            width: 88px;
+            line-height: 70px;
+            z-index: 111;
+            cursor:pointer;
+        }
+
+        #header .nav ul li:hover{
+            color: #fff;
+        }
+
+        #header .nav span.active{
+            width: 88px;
+            height: 63px;
+            background: url("tMall.png") no-repeat;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <div class="nav">
+        <span class="active"></span>
+        <ul>
+            <li>双11狂欢</li>
+            <li>服装会场</li>
+            <li>数码家电</li>
+            <li>家具建材</li>
+            <li>母婴童装</li>
+            <li>手机会场</li>
+            <li>美妆会场</li>
+            <li>进口会场</li>
+            <li>飞猪旅行</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    let active = document.querySelector(".active");
+    let li = document.querySelectorAll(".nav li");
+    let defaultX = 0;
+    for (let i = 0; i < li.length; i++) {
+        // 鼠标移入
+        li[i].onmouseover = mouseoverHandle;
+        // 鼠标点击
+        li[i].onclick = clickHandle;
+        // 鼠标离开
+        li[i].onmouseout = mouseoutHandle;
+    }
+    function mouseoverHandle() {
+        animation(this.offsetLeft)
+    }
+
+
+    function clickHandle() {
+        defaultX = this.offsetLeft;
+    }
+
+    function mouseoutHandle() {
+        animation(defaultX);
+    }
+    function animation(target) {
+        clearInterval(active.timeId)
+        //定时器的id值存储到对象的一个属性中
+        active.timeId = setInterval(function () {
+            // //获取元素的当前的位置,数字类型
+            var current = active.offsetLeft
+            // //每次移动的距离
+            var step = (target - current) /10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            current+= step
+            if (Math.abs(current - target) > Math.abs(step)) {
+                active.style.left = current + "px";
+            } else {
+                //清理定时器
+                clearInterval(active.timeId);
+                //直接到达目标
+                active.style.left = target + "px";
+            }
+        },20)
+    }
+
+</script>
+</body>
+</html>
